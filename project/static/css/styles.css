@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'NewKansas-Light';
+  src: url('/static/fonts/NewKansas-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NewKansas-Regular';
+  src: url('/static/fonts/NewKansas-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NewKansas-Thin';
+  src: url('/static/fonts/NewKansas-Thin.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NewKansas-Medium';
+  src: url('/static/fonts/NewKansas-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Ui-Sans-Light';
+  src: url('/static/fonts/sf-ui-display-light') format('woff');
+}
+
+
+body {
+  font-family: "Satoshi", sans-serif;
+}
+
+ul.flash-messages {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.flash-messages li {
+  margin-bottom: 10px;
+  color: red; /* Or choose your desired color */
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  font-family: "CatShop", sans-serif;
+}
+
+.font2 {
+  font-family: 'NewKansas-Medium', sans-serif;
+}
+
+.welcome {
+  font-size: 50px;
+}
+
+.custom-color1 {
+  background-color: #f8f8f3;
+}
+
+.custom-color2 {
+  background-color: hsl(302, 46%, 89%);
+}
+
+.custom-color3 {
+  background-color: #000000;
+}
+
+.email-image {
+  width: 10%;
+  height: auto;
+}
+
+.mx {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.intro {
+  font-size: 70px;
+  line-height: 100%;
+}
+
+.mb {
+  margin-top: 30px;
+}
+
+.card-height {
+  height: 350px; 
+  border: none;
+}
+
+.light {
+  color: rgb(195, 4, 182);
+}
+
+/* Custom font size classes */
+.fs-10 {
+  font-size: 10px;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}

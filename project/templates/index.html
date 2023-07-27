@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Engage Your Audience
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg mb-5">
+        <div class="container">
+            <a class="navbar-brand font2" href="#">Arcane</a>
+
+            <!-- Hamburger button (Navbar Toggler) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ms-auto fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="intro">Power Up Your Newsletters With Arcane.</h1>
+            </div>
+            <div class="col-md-4">
+                <h6 class="mb-4">Arcane is your all-in-one solution for simplifying your newsletter journey.
+                    Focus on what truly matters
+                    – creating outstanding content – while we handle the rest.</h6>
+                <a href="/register" class="btn btn-dark btn-lg btn-block fs-14">Get started &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mb-5 mb">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-height">
+                    <div class="h-100">
+                        <img src="../static/img/img3.jpg" class="card-img rounded-5" alt="Card Image"
+                            style="object-fit: cover; height: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-none d-md-block">
+                <div class="card card-height">
+                    <div class="h-100">
+                        <img src="../static/img/img2.jpg" class="card-img rounded-5" alt="Card Image"
+                            style="object-fit: cover; height: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block main %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-sm-10 col-md-8 col-lg-6">
+                <div class="card mx-auto" style="border-radius: 1rem; max-width: 30rem;">
+                    <div class="row g-0">
+
+                        <div class="d-flex align-items-center">
+                            <div class="card-body p-5 p-lg-5 text-black">
+
+                                <form action="/register" method="post">
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <a href="/" class="h1 fw-bold mb-0 font2">Arcane</a>
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3 fs-6">Sign up for Arcane</h5>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example17">Email</label>
+                                        <input name="email" type="email" id="form2Example17"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example17">Username</label>
+                                        <input name="username" type="text" id="form2Example17"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example27">Password</label>
+                                        <input name="password" type="password" id="form2Example27"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example27">Confirm
+                                            Password</label>
+                                        <input name="confirmation" type="password" id="form2Example27"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block fs-6" type="submit">Sign
+                                            up</button>
+                                    </div>
+
+                                    <a class="small text-muted" href="#!">Forgot password?</a>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Create a free account or <a
+                                            href="/login" style="color: #393f81;">Log in</a></p>
+                                    <a href="#!" class="small text-muted">Terms of use.</a>
+                                    <a href="#!" class="small text-muted">Privacy policy</a>
+                                </form>
+
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                <ul class="flash-messages">
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

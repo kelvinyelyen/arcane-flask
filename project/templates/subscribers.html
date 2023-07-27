@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Subscribers
+{% endblock %}
+
+{% block main %}
+<section class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg mb-5">
+        <div class="container">
+            <a class="navbar-brand font2" href="/dashboard">Arcane</a>
+
+            <!-- Hamburger button (Navbar Toggler) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ms-auto fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/subscribers">Audience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/compose">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            Logout ({{ user.email }})
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container h-100">
+        <h1 class="font2">Audience</h1>
+        <!-- <p class="fs-2">{{ user.username.capitalize() }}</p> -->
+        <p>Your audience has <span class="light">{{ num_subscribers }}</span> contact(s). <span class="light">{{
+                num_subscribers }}</span> of these is subscribed.</p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table table-responsive-xl table-hover">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>User</th>
+                                <th>Email Marketing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subscriber in subscribers %}
+                            <tr class="alert" role="alert">
+                                <td class="d-flex align-items-center">
+                                    <div class="email">
+                                        <span>{{ subscriber.email }}</span>
+                                        <span>Added: {{ subscriber.date_added|datetime_format }}</span>
+                                    </div>
+                                </td>
+                                <td>{{subscriber.email.split("@")[0]}}</td>
+                                <td class="status"><span class="active">Subscribed</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

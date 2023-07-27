@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Subscribe
+{% endblock %}
+
+{% block main %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-10 col-lg-8">
+                <div class="card" style="border-radius: 1rem; max-width: 30rem; margin: 0 auto;">
+                    <div class="row g-0">
+                        <div class="d-flex align-items-center">
+                            <div class="card-body p-5 p-lg-5 text-black">
+
+                                <form action="subscribe" method="post">
+                                    <div class="d-flex mb-3 pb-1">
+                                        <span class="h1 fw-bold mb-0 font2 fs-20">Subscribe to
+                                            {{user_id.title()}}'s newsletter</span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example17">Email</label>
+                                        <input name="email" type="email" id="form2Example17"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
+                                    
+                                    <input type="hidden" name="user_id" value="{{ user_id }}">
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block fs-6"
+                                            type="submit">Subscribe</button>
+                                    </div>
+
+                                    <a href="#!" class="small text-muted">Created with</a>
+                                    <a href="/"><span class="fw-bold mb-0 font2 text-black">Arcane</span></a>
+                                </form>
+
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                <ul class="flash-messages">
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                                {% endwith %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

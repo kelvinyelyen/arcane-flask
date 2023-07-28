@@ -2,6 +2,8 @@
 
 Web application designed as part of the final project for Harvard's CS50 course. It provides an all-in-one solution for users to create, manage, and send newsletters to their subscribers. 
 
+#### Video Demo:  [YouTube](https://www.youtube.com/watch?v=Yr1_HLpfW2Q)
+
 ## Features
 
 1. **User Registration**: Users can create an account and register as newsletter creators.

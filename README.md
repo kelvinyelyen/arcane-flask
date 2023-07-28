@@ -1,6 +1,6 @@
 # newsletter-automation
 
-A web application designed to simplify the process of managing newsletters and connecting with subscribers. It provides an all-in-one solution for users to create, edit, and send newsletters to their subscribers effortlessly.
+Web application designed as part of the final project for Harvard's CS50 course. It provides an all-in-one solution for users to create, manage, and send newsletters to their subscribers. 
 
 ## Features
 
@@ -32,5 +32,7 @@ To use the Newsletter App, follow these steps:
 ## Conclusion
 
 It provides a streamlined and user-friendly platform for newsletter creators to engage with their audience effectively. With its powerful features and intuitive interface, it enables users to focus on crafting compelling content and building meaningful connections with their subscribers.
+
+
 
 Feel free to contribute to the development by creating pull requests or reporting issues!

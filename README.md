@@ -1,8 +1,6 @@
 # newsletter-automation
 
-Web application designed as part of the final project for Harvard's CS50 course. It provides an all-in-one solution for users to create, manage, and send newsletters to their subscribers. 
-
-#### Video Demo:  [YouTube](https://www.youtube.com/watch?v=Yr1_HLpfW2Q)
+Arcane is a web app, streamlining newsletter management. It provides an intuitive solution for handling subscribers, creating captivating newsletters with a rich text editor, and delivering personalized content. Seamlessly integrated with an email service, it ensures efficient communication and optimal subscriber engagement.
 
 ## Features
 
@@ -21,20 +19,4 @@ Web application designed as part of the final project for Harvard's CS50 course.
 - **Database**: SQLite for development.
 - **Email Service**: Integrates with an email service (e.g., Mailgun) to send newsletters and welcome emails.
 
-## Getting Started
 
-To use the Newsletter App, follow these steps:
-
-1. Clone the repository from GitHub.
-2. Set up the required environment variables for email service and database configuration.
-3. Install the necessary dependencies using `pip install -r requirements.txt`.
-4. Run the application using `python app.py`.
-5. Access the app in your browser at `http://localhost:5000`.
-
-## Conclusion
-
-It provides a streamlined and user-friendly platform for newsletter creators to engage with their audience effectively. With its powerful features and intuitive interface, it enables users to focus on crafting compelling content and building meaningful connections with their subscribers.
-
-
-
-Feel free to contribute to the development by creating pull requests or reporting issues!

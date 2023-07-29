@@ -1,4 +1,4 @@
-# newsletter-automation
+# Arcane Newsletter Automation
 
 Arcane is a web app, streamlining newsletter management. It provides an intuitive solution for handling subscribers, creating captivating newsletters with a rich text editor, and delivering personalized content. Seamlessly integrated with an email service, it ensures efficient communication and optimal subscriber engagement.
 

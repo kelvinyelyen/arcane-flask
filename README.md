@@ -7,7 +7,6 @@ Arcane is a web app minimally designed to streamline newsletter management. It o
 - **User Registration:** Easily create accounts for newsletter creators.
 - **Subscriber Management:** Effortlessly handle subscriber lists, including additions.
 - **Rich Text Editor:** Powerful tool for visually stunning newsletter content.
-- **Personalization:** Customize newsletters with dynamic content using templates.
 - **Newsletter Sending:** Schedule or send newsletters instantly to your subscriber list.
 - **Responsive Design:** Enjoy a seamless experience across desktop and mobile devices.
 
@@ -22,7 +21,7 @@ Arcane is a web app minimally designed to streamline newsletter management. It o
 
 1. Clone the repository.
 2. Install dependencies using `pip install -r requirements.txt`.
-3. Configure the email service settings in `config.py`.
+3. Setup environment variable for mailgun in `.env.local`.
 4. Run the app with `python app.py`.
 
 ## License

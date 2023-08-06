@@ -15,13 +15,13 @@ Arcane is a web app minimally designed to streamline newsletter management. It o
 - **Backend:** Python with Flask framework and SQLAlchemy for database management.
 - **Frontend:** HTML, CSS, and JavaScript with Bootstrap for responsive design.
 - **Database:** SQLite for development.
-- **Email Service:** Integrates with an email service (e.g., Mailgun) to send newsletters and welcome emails.
+- **Email Service:** Integrates with an email service (Mailgun) to send newsletters and welcome emails.
 
 ## Getting Started
 
 1. Clone the repository.
 2. Install dependencies using `pip install -r requirements.txt`.
-3. Setup environment variable for mailgun in `.env.local`.
+3. Setup environment variables `.env.local`.
 4. Run the app with `python app.py`.
 
 ## License

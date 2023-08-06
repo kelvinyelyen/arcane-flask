@@ -4,13 +4,12 @@ Arcane is a web app, streamlining newsletter management. It provides an intuitiv
 
 ## Features
 
-1. **User Registration**: Users can create an account and register as newsletter creators.
-2. **Subscriber Management**: Users can manage their subscriber list, including adding subscribers.
-3. **Rich Text Editor**: The app offers a powerful rich text editor that allows users to create visually appealing and engaging newsletter content.
-4. **Personalization**: Users can personalize newsletters with subscriber names or other dynamic content using templating features.
-5. **Welcome Emails**: Subscribers receive a warm welcome email when they sign up, providing a positive first impression.
-6. **Newsletter Sending**: Users can schedule newsletters for future sending or send them instantly to their subscriber list.
-7. **Responsive Design**: The app is fully responsive, ensuring a seamless user experience on both desktop and mobile devices.
+1. **User Registration:** Easily create accounts for newsletter creators.
+2. **Subscriber Management:** Effortlessly handle subscriber lists, including additions.
+3. **Rich Text Editor:** Powerful tool for visually stunning newsletter content.
+4. **Personalization:** Customize newsletters with dynamic content using templates.
+5. **Newsletter Sending:** Schedule or send newsletters instantly to your subscriber list.
+6. **Responsive Design:** Enjoy a seamless experience across desktop and mobile devices.
 
 ## Tech Stack
 

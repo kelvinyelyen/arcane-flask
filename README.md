@@ -1,6 +1,6 @@
 # Arcane
 
-Arcane is a web app minimally designed to streamline newsletter management. It offers an intuitive solution for handling subscribers, creating captivating newsletters with a rich text editor, and delivering personalized content. Seamlessly integrated with an email service, it ensures efficient communication and optimal subscriber engagement.
+Arcane serves as a web-based solution as part of my Harvard's CS50x final project, designed with a minimalist approach to tackle the complexities of newsletter management. It provides an intuitive remedy for subscriber handling, enabling the creation of engaging newsletters using a comprehensive text editor, and ensuring the distribution of personalized content. Through seamless integration with an email service, it optimizes communication efficiency and fosters increased engagement among subscribers. [Initail Video presentation](https://www.youtube.com/watch?v=Yr1_HLpfW2Q)
 
 ## Features
 

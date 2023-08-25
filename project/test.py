@@ -1,14 +1,11 @@
-import smtplib
+import pymongo
+from pymongo import MongoClient
 
-from email.mime.text import MIMEText
+mongo_uri = "mongodb+srv://kelvinyelyen:2Dsy6OdNnr0fcO93@cluster0.vymdpwp.mongodb.net/?retryWrites=true&w=majority"
+connect = MongoClient(mongo_uri)
 
-msg = MIMEText('Testing some Mailgun awesomness')
-msg['Subject'] = "Hello"
-msg['From']    = ""
-msg['To']      = ""
+db = connect["arcane"]
+users = db["users"]
 
-s = smtplib.SMTP('smtp.mailgun.org', 587)
-
-s.login('', '')
-s.sendmail(msg['From'], msg['To'], msg.as_string())
-s.quit()
+user1 = {"id": 0, "email": "emma@gmail.com", "name": "Emma Powell"}
+users.insert_one(user1)

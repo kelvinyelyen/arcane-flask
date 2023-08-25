@@ -1,22 +1,22 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from datetime import datetime
 from tempfile import mkdtemp
 import smtplib
 from email.mime.text import MIMEText
 from html2text import html2text
-from flask_mail import Message 
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from pymongo import MongoClient
 
 # Configure application
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-db = SQLAlchemy(app)
+# Connect to MongoDB
+app.config['MONGO_URI'] = os.environ.get('DB_URI')
+mongo_client = MongoClient(app.config['MONGO_URI'])
+db = mongo_client["arcane"]
 
 
 # Configure session to use filesystem (instead of signed cookies)
@@ -42,7 +42,7 @@ def send_welcome_email(email, username):
     msg['To'] = email
 
     try:
-        s = smtplib.SMTP('MAILGUN_SMTP_SERVER', 587)
+        s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
         s.login(MAILGUN_SMTP_USERNAME, MAILGUN_SMTP_PASSWORD)
         s.sendmail(msg['From'], [msg['To']], msg.as_string())
         s.quit()
@@ -59,33 +59,30 @@ def datetime_format(value, format='%Y-%m-%d %H:%M:%S'):
         return ""
     return value.strftime(format)
 
-
 # Database Initialization
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
-
+class User:
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
 
-class Subscriber(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=False, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    date_added = db.Column(
-        db.DateTime, default=datetime.utcnow, nullable=False)
-
-    # Add a relationship with the User model
-    user = db.relationship(
-        'User', backref=db.backref('subscribers', lazy=True))
-
+    def save(self):
+        db.users.insert_one(self.__dict__)
+        
+class Subscriber:
     def __init__(self, email, user_id):
         self.email = email
         self.user_id = user_id
+        self.date_added = datetime.utcnow()
+
+    # Methods for saving and querying data
+    def save(self):
+        db.subscribers.insert_one(self.__dict__)
+
+    @staticmethod
+    def find_by_user_id(user_id):
+        return db.subscribers.find({"user_id": user_id})
+    # ... Other methods ...
 
 
 @app.after_request
@@ -130,12 +127,12 @@ def login():
             flash("Please enter your email and password.")
             return redirect(url_for("login"))
 
-        user = User.query.filter_by(email=email).first()
+        user = db.users.find_one({"email": email})
 
-        if user and check_password_hash(user.password, password):
-            session["user_id"] = user.id
-            session["username"] = user.username
-            session["email"] = user.email
+        if user and check_password_hash(user["password"], password):
+            session["user_id"] = user["_id"]
+            session["username"] = user["username"]
+            session["email"] = user["email"]
             return redirect(url_for("dashboard"))
 
         flash("Invalid email or password.")
@@ -148,35 +145,32 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-
-        # Ensure email, username, password, and confirmation are submitted
         email = request.form.get("email")
         username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
-        if not email:
-            flash("You must provide an email")
-            return redirect(url_for("register"))
-        elif not username:
-            flash("You must provide a username")
-            return redirect(url_for("register"))
-        elif not password:
-            flash("You must provide a password")
+        if not email or not username or not password:
+            flash("Please provide all required information")
             return redirect(url_for("register"))
         elif password != confirmation:
             flash("Passwords do not match")
             return redirect(url_for("register"))
 
+        # Check if the username or email already exists in the database
+        if db.users.find_one({"$or": [{"username": username}, {"email": email}]}):
+            flash("Username or email already taken")
+            return redirect(url_for("register"))
+
         # Create a new user
         new_user = User(username=username, email=email, password=password)
-        db.session.add(new_user)
-        db.session.commit()
+        new_user.save()
 
         return redirect(url_for("login"))
 
     else:
         return render_template("register.html")
+
 
 
 # Logout
@@ -194,18 +188,16 @@ def subscribe():
     if request.method == "GET":
         user_id = request.args.get("user_id")
 
-        # Validate the username
         if not user_id:
             flash("Invalid subscription request")
             return redirect(url_for("subscribe"))
 
         # Retrieve the user details using the username
-        user = User.query.filter_by(username=user_id).first()
+        user = db.users.find_one({"username": user_id})
         if not user:
             flash("Invalid subscription request")
             return redirect(url_for("subscribe"))
 
-        # Render the subscription page template for GET requests
         return render_template("subscription.html", user_id=user_id)
 
     elif request.method == "POST":
@@ -217,26 +209,23 @@ def subscribe():
             return redirect(url_for("subscribe"))
 
         # Retrieve the user details using the username
-        user = User.query.filter_by(username=user_id).first()
+        user = db.users.find_one({"username": user_id})
         if not user:
             flash("Invalid user")
             return redirect(url_for("subscribe"))
 
-        # Check if the email already exists in the Subscriber table
-        existing_subscriber = Subscriber.query.filter_by(
-            email=email, user_id=user.id).first()
+        # Check if the email already exists in the Subscriber collection
+        existing_subscriber = db.subscribers.find_one(
+            {"email": email, "user_id": user["_id"]})
+
         if existing_subscriber:
             flash("It seems you've already subscribed.")
             return render_template("subscription.html", user_id=user_id)
 
-        # Create a new instance of your Subscriber model and set the email field and any other relevant fields
-        subscriber = Subscriber(email=email, user_id=user.id)
-        # Store the subscriber in the database
-        db.session.add(subscriber)
-        db.session.commit()
+        subscriber = Subscriber(email=email, user_id=user["_id"])
+        subscriber.save()
 
-        # Send a welcome email to the subscriber
-        send_welcome_email(email, user.username)
+        send_welcome_email(email, user["username"])
 
         print("Thank you for subscribing!")
         return redirect(url_for("subscribed"))
@@ -247,27 +236,21 @@ def subscribe():
 # Subscribers
 @app.route("/subscribers")
 def subscribers():
-    # Check if logged in
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # Retrieve user_id from session
     user_id = session["user_id"]
 
-    # Retrieve the logged-in user from the database using the user ID
-    user = User.query.get(user_id)
+    user = db.users.find_one({"_id": user_id})
 
-    # Retrieve the subscribers associated with the logged-in user from the database
-    subscribers = Subscriber.query.filter_by(user_id=user_id).all()
+    subscribers = list(db.subscribers.find({"user_id": user_id}))
 
-    num_subscribers = Subscriber.query.filter_by(user_id=user.id).count()
+    num_subscribers = db.subscribers.count_documents({"user_id": user["_id"]})
 
-    # Store the subscriber data in the session
     session["subscribers_data"] = {
         "num_subscribers": num_subscribers
     }
 
-    # Render the template and pass the subscribers' data
     return render_template("subscribers.html", user=user, subscribers=subscribers, num_subscribers=num_subscribers)
 
 
@@ -290,7 +273,7 @@ def compose():
             return redirect(url_for("login"))
 
         # Retrieve the user details using the user_id
-        user = User.query.get(user_id)
+        user = db.users.find_one({"_id": user_id})
         if not user:
             flash("Invalid user")
             return redirect(url_for("login"))
@@ -304,7 +287,7 @@ def compose():
             return redirect(url_for("login"))
 
         # Retrieve the user details using the user_id
-        user = User.query.get(user_id)
+        user = db.users.find_one({"_id": user_id})
         if not user:
             flash("Invalid user")
             return redirect(url_for("login"))
@@ -316,7 +299,7 @@ def compose():
             return redirect(url_for("compose"))
 
         # Get all the subscribers of the user
-        subscribers = Subscriber.query.filter_by(user_id=user_id).all()
+        subscribers = db.subscribers.find({"user_id": user["_id"]})
 
         # Send the message to all the subscribers
         for subscriber in subscribers:
@@ -324,6 +307,7 @@ def compose():
 
         flash("Message sent successfully to all subscribers.")
         return redirect(url_for("dashboard"))
+
 
 # Function to send an email to a subscriber
 def send_email(email, subject, content):
@@ -334,7 +318,7 @@ def send_email(email, subject, content):
     msg['To'] = email
 
     try:
-        s = smtplib.SMTP('MAILGUN_SMTP_SERVER', 587)
+        s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
         s.login(MAILGUN_SMTP_USERNAME, MAILGUN_SMTP_PASSWORD)
         s.sendmail(msg['From'], [msg['To']], msg.as_string())
         s.quit()
@@ -345,13 +329,6 @@ def send_email(email, subject, content):
 
 
 
-# Main
-if __name__ == '__main__':
+if __name__ == "__main__":
+    app.config['DEBUG'] = True
     app.run()
-
-
-# from app import app, db
-# with app.app_context():
-#     db.create_all()
-#     db.session.commit()
-#     print("Database tables created.");

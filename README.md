@@ -10,15 +10,17 @@ Arcane is built on the following stack:
 - **[Bootstrap](https://getbootstrap.com/)** - Responsive design
 - **SQLAlchemy** - Database for development
 - **[MongoDB](https://www.mongodb.com/)** - Database for production
-- **[Mailgub](https://www.mailgun.com/)** - Email Service
+- **[Mailgun](https://www.mailgun.com/)** - Email Service
 
 ## Getting Started
 ### Prerequisites
-- Python 3.7+
+
+- Python 3.10+
 - `virtualenv` (optional but recommended)
 - MongoDB
 
 ### Installation
+
 1. Clone the repository:
     ```bash
     git clone https://github.com/your-username/arcane.git
@@ -37,7 +39,6 @@ Arcane is built on the following stack:
     ```
 
 ## Usage
-
 ### Running the App
 1. Configure your MongoDB URI in `.env`:
     ```python
@@ -51,8 +52,10 @@ Arcane is built on the following stack:
 
 3. Access the app in your browser at `http://localhost:5000`.
 
+
 ## Configuration
 - MongoDB URI: Update the `.env` file with your MongoDB URI.
 
-## Contributing
-Contributions are welcome! If you find a bug or have suggestions for improvements, please open an issue or create a pull request.
+
+## Found an issue or have a suggestion?
+<a href="https://github.com/kelvinyelyen/arcane/issues/new" target="_blank">Create an issue</a>

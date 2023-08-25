@@ -1,3 +1,9 @@
 # Ignore virtual environment directories
-venv/
+arcane_venv/
+
+# Ignore .env file (contains sensitive environment variables)
 .env
+
+# Other entries in your .gitignore file...
+.vscode/
+__pycache__/

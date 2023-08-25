@@ -1,7 +1,7 @@
 import pymongo
 from pymongo import MongoClient
 
-mongo_uri = "mongodb+srv://kelvinyelyen:2Dsy6OdNnr0fcO93@cluster0.vymdpwp.mongodb.net/?retryWrites=true&w=majority"
+mongo_uri = ""
 connect = MongoClient(mongo_uri)
 
 db = connect["arcane"]

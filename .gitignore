@@ -7,3 +7,5 @@ arcane_venv/
 # Other entries in your .gitignore file...
 .vscode/
 __pycache__/
+app/__pycache__/
+app/**/__pycache__/

@@ -81,6 +81,13 @@ a {
   line-height: 100%;
 }
 
+@media (max-width: 768px) {
+  /* This will apply when the screen width is 768px or smaller (tablet and mobile) */
+  .intro {
+    font-size: 40px; /* Adjust this value to your preference */
+  }
+}
+
 .mb {
   margin-top: 30px;
 }

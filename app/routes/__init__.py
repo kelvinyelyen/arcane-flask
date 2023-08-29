@@ -5,7 +5,7 @@ index_bp = Blueprint("index", __name__)
 auth_bp = Blueprint("auth", __name__)
 dashboard_bp = Blueprint("dashboard", __name__)
 subscribers_bp = Blueprint("subscribers", __name__)
-compose_bp = Compose("compose", __name__)
+compose_bp = Blueprint("compose", __name__)
 
 # ...
 

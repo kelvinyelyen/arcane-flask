@@ -10,5 +10,5 @@ compose_bp = Blueprint("compose", __name__)
 # ...
 
 # Import route modules after creating the Blueprints to avoid circular imports
-from app.routes import index, auth, dashboard, subscribers, Compose
+from app.routes import index, auth, dashboard, subscribers, compose
 # ...

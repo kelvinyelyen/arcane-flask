@@ -1,8 +1,3 @@
-"""
-The code above defines routes for login, registration, and logout functionality in a Flask
-application.
-:return: The code is returning a Flask redirect response to the specified URL.
-"""
 from flask import flash, Blueprint, redirect, render_template, request, session, url_for
 from app import app
 from app.models import User

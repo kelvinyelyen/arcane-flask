@@ -1,9 +1,3 @@
-"""
-The `compose` function is a Flask route that allows a logged-in user to send a message to all their
-subscribers.
-:return: a response object that redirects the user to a different page. The specific page that the
-user is redirected to depends on the logic in the function.
-"""
 from flask import flash, request, redirect, render_template, session, url_for
 from app import app
 from app.utils.email_utils import send_email

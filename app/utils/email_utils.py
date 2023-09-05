@@ -1,14 +1,16 @@
-import smtplib
-from email.mime.text import MIMEText
-from html2text import html2text
 from app import app 
+import resend
+from email.mime.text import MIMEText
+import smtplib
+from html2text import html2text
 
-# Access the environment variables
 MAILGUN_SMTP_SERVER = app.config.get('MAILGUN_SMTP_SERVER')
 MAILGUN_SMTP_USERNAME = app.config.get('MAILGUN_SMTP_USERNAME')
 MAILGUN_SMTP_PASSWORD = app.config.get('MAILGUN_SMTP_PASSWORD')
 
-# Welcome email config with mailgun smtp
+# RESEND_API_KEY = app.config.get('RESEND_API_KEY')
+
+# Mailgun
 def send_welcome_email(email, username):
     msg = MIMEText(
         f"Thank you for subscribing to my Newsletter! I'm thrilled to have you.\n\nSincerely,\n{username.title()}")
@@ -26,7 +28,7 @@ def send_welcome_email(email, username):
         print(f"Failed to send welcome email to {email}.")
         print(str(e))
 
-# Function to send an email to a subscriber
+
 def send_email(email, subject, content):
     text_body = html2text(content)
     msg = MIMEText(text_body)
@@ -43,3 +45,34 @@ def send_email(email, subject, content):
     except Exception as e:
         print(f"Failed to send email to {email}.")
         print(str(e))
+
+# Resend
+# def send_welcome_email(email, username):
+#     params = {
+#         "from": "your_email@example.com",
+#         "to": email,
+#         "subject": f"Welcome to the Newsletter, {username.title()}",
+#         "html": f"Thank you for subscribing to my Newsletter! I'm thrilled to have you.<br><br>Sincerely,<br>{username.title()}",
+#     }
+
+#     try:
+#         response = resend.Emails.send(params)
+#         print(f"Welcome email sent successfully to {email}. Response: {response}")
+#     except Exception as e:
+#         print(f"Failed to send welcome email to {email}. Error: {str(e)}")
+
+
+# def send_email(email, subject, content):
+#     text_body = html2text(content)
+#     params = {
+#         "from": "your_email@example.com",
+#         "to": email,
+#         "subject": subject,
+#         "html": content,
+#     }
+
+#     try:
+#         response = resend.Emails.send(params)
+#         print(f"Email sent successfully to {email}. Response: {response}")
+#     except Exception as e:
+#         print(f"Failed to send email to {email}. Error: {str(e)}")

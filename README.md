@@ -11,7 +11,7 @@ Arcane serves as a web-based solution as part of my Harvard's CS50x final projec
 - [**SQLAlchemy**](https://www.sqlalchemy.org/) - Development database
 - [**MongoDB**](https://www.mongodb.com/) - Production database
 - [**Mailgun**](https://www.mailgun.com/) - Email Service
-- [Resend](https://resend.com/) - Email Service 
+- [**Resend**](https://resend.com/) - Email Service 
 
 ## Getting Started
 

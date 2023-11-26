@@ -64,4 +64,5 @@ MongoDB URI: Update the `.env` file with your MongoDB URI.
   
 ## Found an issue or have a suggestion?
 
-&lt;a href="https://github.com/kelvinyelyen/arcane/issues/new" target="\_blank"&gt;Create an issue&lt;/a&gt;
+[Create an issue](https://github.com/kelvinyelyen/arcane/issues/new)
+
